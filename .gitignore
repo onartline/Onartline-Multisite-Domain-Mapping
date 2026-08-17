@@ -1,0 +1,23 @@
+# OS-Dateien
+.DS_Store
+Thumbs.db
+
+# Editor-/IDE-Dateien
+.vscode/
+.idea/
+
+# Log- und Cache-Dateien
+*.log
+*.cache
+
+# Lokale Konfigurationsdateien
+.env
+wp-config.php
+
+# Node/Composer (falls verwendet)
+node_modules/
+vendor/
+
+# Backup-Dateien
+*.bak
+*.tmp
