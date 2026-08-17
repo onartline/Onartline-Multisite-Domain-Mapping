@@ -1,0 +1,421 @@
+# Onartline Multisite Domain Mapping – Translation Template
+# Copyright (C) 2026 Onartline Multisite Domain Mapping
+# This file is distributed under the same license as the Onartline Multisite Domain Mapping plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Onartline Multisite Domain Mapping 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/onartline-multisite-domain-mapping\n"
+"POT-Creation-Date: 2026-07-19 00:00+0000\n"
+"PO-Revision-Date: 2026-07-19 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: onartline-multisite-domain-mapping\n"
+
+# --- Plugin Main / General ---
+
+#. Plugin Name
+msgid "Onartline Multisite Domain Mapping"
+msgstr ""
+
+#. Plugin Description
+msgid "Map domains to sites in a WordPress Multisite network. Requires PHP 8.3+ and WordPress 7.0+."
+msgstr ""
+
+# --- Minimum Requirements ---
+
+#: onartline-multisite-domain-mapping.php
+msgid "Onartline Multisite Domain Mapping requires PHP 8.3 or higher."
+msgstr ""
+
+#: onartline-multisite-domain-mapping.php
+msgid "Onartline Multisite Domain Mapping requires a WordPress Multisite installation."
+msgstr ""
+
+# --- Activator ---
+
+#: includes/class-omdm-activator.php
+msgid "Onartline Multisite Domain Mapping requires a WordPress Multisite installation. Please set up a network in your WordPress installation first, then reactivate the plugin to manage your domains."
+msgstr ""
+
+#: includes/class-omdm-activator.php
+msgid "Plugin activation not possible"
+msgstr ""
+
+#: includes/class-omdm-activator.php
+msgid "sunrise.php was successfully copied to wp-content/ and removed from the plugin folder."
+msgstr ""
+
+#: includes/class-omdm-activator.php
+msgid "Add the following line to your wp-config.php – directly before require_once ABSPATH . 'wp-settings.php';"
+msgstr ""
+
+#: includes/class-omdm-activator.php
+msgid "An existing sunrise.php was found in wp-content/ that does not originate from this plugin. It was NOT overwritten to avoid conflicts."
+msgstr ""
+
+#: includes/class-omdm-activator.php
+msgid "Please check manually whether the existing file is compatible with this plugin, and replace it yourself if necessary."
+msgstr ""
+
+#: includes/class-omdm-activator.php
+msgid "wp-content/ is currently not writable. Once the write permissions have been adjusted, you can continue the installation here – without deactivating and reactivating the plugin:"
+msgstr ""
+
+#: includes/class-omdm-activator.php
+msgid "Continue installation now"
+msgstr ""
+
+#: includes/class-omdm-activator.php
+msgid "Alternatively, manual installation is also possible:"
+msgstr ""
+
+#: includes/class-omdm-activator.php
+msgid "Copy %1$s to %2$s"
+msgstr ""
+
+#: includes/class-omdm-activator.php
+msgid "sunrise.php could not be copied automatically. Please install manually:"
+msgstr ""
+
+#: includes/class-omdm-activator.php
+msgid "sunrise.php was not found in the plugin folder. Please download and install the plugin again."
+msgstr ""
+
+#: includes/class-omdm-activator.php
+msgid "sunrise.php already exists in wp-content/."
+msgstr ""
+
+#: includes/class-omdm-activator.php
+msgid "The SUNRISE constant is already correctly set in wp-config.php."
+msgstr ""
+
+#: includes/class-omdm-activator.php
+msgid "Note:"
+msgstr ""
+
+#: includes/class-omdm-activator.php
+msgid "The SUNRISE constant is not set in wp-config.php (or is set to false). Please add the following line – directly before require_once ABSPATH . 'wp-settings.php';"
+msgstr ""
+
+#: includes/class-omdm-activator.php
+msgid "In addition, an unused sunrise.php still exists in the plugin folder (e.g. from an old installation or a plugin that is no longer in use). It was not removed automatically because a file already existed in wp-content/. Please delete it manually: %s"
+msgstr ""
+
+# --- Network Admin – Menu ---
+
+#: admin/class-omdm-network-admin.php
+msgid "Domain Mapping"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Overview"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Add domain"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Settings"
+msgstr ""
+
+# --- Network Admin – Overview ---
+
+#: admin/class-omdm-network-admin.php
+msgid "Domain Mapping – Overview"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Search domains"
+msgstr ""
+
+# --- Network Admin – Add / Edit Domain ---
+
+#: admin/class-omdm-network-admin.php
+msgid "Edit domain"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Site"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Domain"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Domain without http:// or https://"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Primary Domain"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Set as primary domain"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "All other domains of this site will redirect to this one."
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "HTTPS"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Enforce HTTPS for this domain"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Update domain"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Save domain"
+msgstr ""
+# --- Network Admin – Overview (List Table columns/actions) ---
+# Hinweis: Diese Strings stammen vermutlich aus admin/class-omdm-domain-list-table.php,
+# das mir in dieser Session nicht vorlag. Wortlaut daher unverändert aus der alten .pot übernommen.
+
+#: admin/class-omdm-network-admin.php
+msgid "This domain is already assigned to another site."
+msgstr ""
+
+#: admin/class-omdm-domain-list-table.php
+msgid "Site ID"
+msgstr ""
+
+#: admin/class-omdm-domain-list-table.php
+msgid "Site Name"
+msgstr ""
+
+#: admin/class-omdm-domain-list-table.php
+msgid "Primary"
+msgstr ""
+
+#: admin/class-omdm-domain-list-table.php
+msgid "Actions"
+msgstr ""
+
+#: admin/class-omdm-domain-list-table.php
+msgid "Edit"
+msgstr ""
+
+#: admin/class-omdm-domain-list-table.php
+msgid "Delete"
+msgstr ""
+
+#: admin/class-omdm-domain-list-table.php
+msgid "Really delete this domain?"
+msgstr ""
+
+#: admin/class-omdm-domain-list-table.php
+msgid "No domains configured."
+msgstr ""
+
+#: admin/class-omdm-domain-list-table.php
+msgid "All"
+msgstr ""
+
+#: admin/class-omdm-domain-list-table.php
+msgid "Secondary"
+msgstr ""
+
+# --- Network Admin – Settings ---
+
+#: admin/class-omdm-network-admin.php
+msgid "Domain Mapping – Settings"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Default HTTPS"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Enforce HTTPS for all domains by default"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "301 redirect"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Enable 301 redirect for non-primary domains"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Site admin domain mapping"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Allow site admins to add their own domains"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "If enabled, a \"Domain Mapping\" menu item will appear in the dashboard of each subsite."
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "DNS information"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "As a super admin, you can specify here the IP address or CNAME domain that users should point their DNS entry to. This information is for informational purposes only and will be displayed to your users."
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Server IP address"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "e.g. 192.168.1.1 or multiple, comma-separated"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "IP address for the DNS A record. Enter multiple IPs comma-separated (e.g. for round-robin DNS)."
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Server CNAME domain"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "e.g. proxy.example.com"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "CNAME domain as an alternative to the IP address. Enter internationalized domain names in Punycode format. Note: If a CNAME domain is provided, the IP address is ignored."
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Uninstallation"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Remove data on deletion"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Remove database tables (domain mappings, login tokens) when the plugin is deleted"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Warning: If enabled, all domain mappings will be permanently removed when the plugin is deleted via the plugins overview. Simply deactivating the plugin will always keep the data intact."
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Save settings"
+msgstr ""
+
+# --- Network Admin – Notices ---
+
+#: admin/class-omdm-network-admin.php
+msgid "%d domain was successfully removed from domain mapping."
+msgid_plural "%d domains were successfully removed from domain mapping."
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/class-omdm-network-admin.php
+msgid "The domain \"%1$s\" was successfully removed from domain mapping. However, it is still registered in your network installation. To completely remove \"%1$s\" or make further changes, go to <a href=\"%2$s\">All Sites</a>."
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Settings saved successfully."
+msgstr ""
+
+#: admin/class-omdm-network-admin.php includes/class-omdm-activator.php
+msgid "No permission."
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Please fill in all fields."
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Invalid domain format."
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "An error occurred."
+msgstr ""
+
+# --- Domain Mapper / Login Handler / Site Settings / Sunrise ---
+# Hinweis: Diese Dateien lagen mir in dieser Session nicht vor, Wortlaut unverändert übernommen.
+
+#: includes/class-omdm-domain-mapper.php
+msgid "Domain could not be resolved."
+msgstr ""
+
+#: includes/class-omdm-domain-mapper.php
+msgid "No valid domain found."
+msgstr ""
+
+#: includes/class-omdm-domain-mapper.php
+msgid "Redirect failed."
+msgstr ""
+
+#: includes/class-omdm-login-handler.php
+msgid "Invalid login credentials."
+msgstr ""
+
+#: includes/class-omdm-login-handler.php
+msgid "Login failed."
+msgstr ""
+
+#: includes/class-omdm-site-settings.php
+msgid "Domain Mapping"
+msgstr ""
+
+#: includes/class-omdm-site-settings.php
+msgid "Your Mapped Domains"
+msgstr ""
+
+#: includes/class-omdm-site-settings.php
+msgid "No domains configured for this site."
+msgstr ""
+
+#: includes/class-omdm-site-settings.php
+msgid "DNS Setup"
+msgstr ""
+
+#: includes/class-omdm-site-settings.php
+msgid "To point your domain to this site, please set up the following DNS records:"
+msgstr ""
+
+#: includes/class-omdm-site-settings.php
+msgid "Type"
+msgstr ""
+
+#: includes/class-omdm-site-settings.php
+msgid "Name"
+msgstr ""
+
+#: includes/class-omdm-site-settings.php
+msgid "Value"
+msgstr ""
+
+#: includes/class-omdm-site-settings.php
+msgid "Your domain name (e.g. example.com)"
+msgstr ""
+
+#: sunrise.php
+msgid "Sunrise error: Database not available."
+msgstr ""
+
+#: includes/class-omdm-activator.php
+msgid "An outdated sunrise.php was automatically replaced by the current version from the plugin folder."
+msgstr ""
+
+#: includes/class-omdm-activator.php
+msgid "A newer sunrise.php was found in the plugin folder, but it could not be copied automatically to wp-content/. Please update manually:"
+msgstr ""
+
+#: includes/class-omdm-activator.php
+msgid "I have granted the write permissions – continue installation"
+msgstr ""
