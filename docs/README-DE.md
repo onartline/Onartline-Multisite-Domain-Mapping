@@ -88,7 +88,8 @@ Falls Ihr Server unter Plesk läuft, **müssen** Sie die Einstellung „Bevorzug
 
 Richten Sie Ihre Domain auf Ihren Server aus, indem Sie folgende DNS-Einträge setzen:
 
-- **A-Eintrag** – Name: `@` – Wert: Ihre Server-IP-Adresse
+- **A-Eintrag** – Name: `@` – Wert: Die IPv4-Adresse Ihres Servers
+- **AAAA-Eintrag** – Name: `@` – Wert: Die IPv6-Adresse Ihres Servers (optional, falls vorhanden)
 - **CNAME-Eintrag** – Name: `www` – Wert: Ihre Primärdomain oder Server-CNAME
 
 Die benötigten Werte werden unter **Netzwerkverwaltung → Domain Mapping → Einstellungen** angezeigt.
@@ -122,6 +123,14 @@ und möglicherweise zu „headers already sent“-Fehlern auf der Login-Seite od
 3. Domain-Mapping-Einstellungen – HTTPS, Weiterleitungen und DNS-Informationen
 
 ## Changelog
+
+### 1.0.1
+- Fix: Cache-Invalidierung nach dem Speichern einer neuen Domain in den Website-Einstellungen korrigiert, sodass neu hinzugefügte Domains sofort korrekt aufgelöst werden.
+- Fix: Parse Error durch doppelt definierte Methoden außerhalb der Klasse omdm_Login_Handler behoben.
+- Fix: Domain-Zuordnung schließt Login-, AJAX- und REST-Anfragen nun korrekt aus.
+- Fix: Standardwerte in set_default_options() korrigiert.
+- New: IPv6-Unterstützung im DNS-Informationsfeld der Einstellungsseite ergänzt.
+- New: Einheitliche Format-Validierung für IPv4, IPv6 und CNAME-Einträge eingeführt.
 
 ### 1.0.0
 - Erstveröffentlichung

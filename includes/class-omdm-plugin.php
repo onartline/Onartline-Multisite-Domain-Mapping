@@ -16,7 +16,7 @@ class omdm_Plugin {
 
     protected omdm_Loader $loader;
     protected string $plugin_name = 'onartline-multisite-domain-mapping';
-    protected string $version = '1.0.0';
+    protected string $version = '1.0.1';
 
 
     public function __construct() {

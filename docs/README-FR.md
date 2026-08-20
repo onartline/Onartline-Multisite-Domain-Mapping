@@ -88,7 +88,8 @@ Si votre serveur utilise Plesk, vous **devez** désactiver le paramètre « Doma
 
 Faites pointer votre domaine vers votre serveur en configurant les enregistrements DNS suivants :
 
-- **Enregistrement A** – Nom : `@` – Valeur : l'adresse IP de votre serveur
+- **Enregistrement A** – Nom : `@` – Valeur : l'adresse IPv4 de votre serveur
+- **Enregistrement AAAA** – Nom : `@` – Valeur : l'adresse IPv6 de votre serveur (facultatif, si disponible)
 - **Enregistrement CNAME** – Nom : `www` – Valeur : votre domaine principal ou le CNAME du serveur
 
 Les valeurs requises sont affichées dans **Administration du réseau → Domain Mapping → Paramètres**.
@@ -122,6 +123,14 @@ et éventuellement des erreurs « headers already sent » sur la page de connexi
 3. Paramètres du Domain Mapping – HTTPS, redirections et informations DNS
 
 ## Journal des modifications
+
+### 1.0.1
+- Correction : Correction de l'invalidation du cache après l'enregistrement d'un nouveau domaine dans les paramètres du site, afin que les domaines nouvellement ajoutés soient résolus correctement dès leur ajout.
+- Correction : Résolution d'une erreur d'analyse (parse error) causée par des méthodes dupliquées définies en dehors de la classe omdm_Login_Handler.
+- Correction : L'attribution de domaines exclut désormais correctement les requêtes de connexion, AJAX et REST.
+- Correction : Correction des valeurs par défaut dans set_default_options().
+- Nouveauté : Ajout de la prise en charge de l'IPv6 dans le champ d'informations DNS de la page des paramètres.
+- Nouveauté : Introduction d'une validation de format cohérente pour les entrées IPv4, IPv6 et CNAME.
 
 ### 1.0.0
 - Version initiale

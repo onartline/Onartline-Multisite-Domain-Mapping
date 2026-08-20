@@ -3,10 +3,10 @@
 # This file is distributed under the same license as the Onartline Multisite Domain Mapping plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Onartline Multisite Domain Mapping 1.0.0\n"
+"Project-Id-Version: Onartline Multisite Domain Mapping 1.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/onartline-multisite-domain-mapping\n"
-"POT-Creation-Date: 2026-07-19 00:00+0000\n"
-"PO-Revision-Date: 2026-07-19 00:00+0000\n"
+"POT-Creation-Date: 2026-08-20 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: \n"
@@ -108,7 +108,7 @@ msgstr ""
 
 # --- Network Admin – Menu ---
 
-#: admin/class-omdm-network-admin.php
+#: admin/class-omdm-network-admin.php includes/class-omdm-site-settings.php
 msgid "Domain Mapping"
 msgstr ""
 
@@ -278,7 +278,7 @@ msgid "e.g. 192.168.1.1 or multiple, comma-separated"
 msgstr ""
 
 #: admin/class-omdm-network-admin.php
-msgid "IP address for the DNS A record. Enter multiple IPs comma-separated (e.g. for round-robin DNS)."
+msgid "IPv4 address for the DNS A record. Enter multiple IPs comma-separated (e.g. for round-robin DNS)."
 msgstr ""
 
 #: admin/class-omdm-network-admin.php
@@ -290,7 +290,31 @@ msgid "e.g. proxy.example.com"
 msgstr ""
 
 #: admin/class-omdm-network-admin.php
-msgid "CNAME domain as an alternative to the IP address. Enter internationalized domain names in Punycode format. Note: If a CNAME domain is provided, the IP address is ignored."
+msgid "CNAME domain as an alternative to the IP address. Enter internationalized domain names in Punycode format. Note: If a CNAME domain is provided, the IP address and IPv6 address fields are ignored."
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Server IPv6 address"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "e.g. 2001:db8::1 or multiple, comma-separated"
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "IPv6 address for the DNS AAAA record. Enter multiple IPs comma-separated (e.g. for round-robin DNS). Leave empty if IPv6 is not supported by your server."
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Please enter a valid IPv4 address (e.g. 192.168.1.1)."
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Please enter a valid IPv6 address (e.g. 2001:db8::1)."
+msgstr ""
+
+#: admin/class-omdm-network-admin.php
+msgid "Please enter a valid CNAME domain (e.g. proxy.example.com)."
 msgstr ""
 
 #: admin/class-omdm-network-admin.php
@@ -366,10 +390,6 @@ msgstr ""
 
 #: includes/class-omdm-login-handler.php
 msgid "Login failed."
-msgstr ""
-
-#: includes/class-omdm-site-settings.php
-msgid "Domain Mapping"
 msgstr ""
 
 #: includes/class-omdm-site-settings.php

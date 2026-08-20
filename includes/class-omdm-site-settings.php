@@ -206,6 +206,8 @@ class omdm_Site_Settings {
             exit;
         }
 
+        omdm_Domain_Mapper::invalidate_cache( $domain, $site_id );
+
         wp_safe_redirect( add_query_arg( 'omdm_saved', '1', admin_url( 'admin.php?page=omdm-site-settings' ) ) );
         exit;
     }

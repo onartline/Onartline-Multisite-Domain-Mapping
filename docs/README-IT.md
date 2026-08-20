@@ -88,7 +88,8 @@ Se il tuo server utilizza Plesk, **devi** disattivare l'impostazione "Dominio pr
 
 Punta il tuo dominio al tuo server impostando i seguenti record DNS:
 
-- **Record A** – Nome: `@` – Valore: l'indirizzo IP del tuo server
+- **Record A** – Nome: `@` – Valore: l'indirizzo IPv4 del tuo server
+- **Record AAAA** – Nome: `@` – Valore: l'indirizzo IPv6 del tuo server (opzionale, se disponibile)
 - **Record CNAME** – Nome: `www` – Valore: il tuo dominio principale o il CNAME del server
 
 I valori necessari vengono mostrati in **Amministrazione di rete → Domain Mapping → Impostazioni**.
@@ -122,6 +123,14 @@ e possibilmente errori "headers already sent" nella pagina di login o altrove.
 3. Impostazioni Domain Mapping – HTTPS, reindirizzamenti e informazioni DNS
 
 ## Changelog
+
+### 1.0.1
+- Correzione: Corretta l'invalidazione della cache dopo il salvataggio di un nuovo dominio nelle impostazioni del sito, in modo che i domini appena aggiunti vengano risolti correttamente da subito.
+- Correzione: Risolto un errore di analisi (parse error) causato da metodi duplicati definiti fuori dalla classe omdm_Login_Handler.
+- Correzione: L'assegnazione dei domini ora esclude correttamente le richieste di accesso, AJAX e REST.
+- Correzione: Corretti i valori predefiniti in set_default_options().
+- Novità: Aggiunto il supporto IPv6 nel campo delle informazioni DNS nella pagina delle impostazioni.
+- Novità: Introdotta una validazione del formato coerente per le voci IPv4, IPv6 e CNAME.
 
 ### 1.0.0
 - Rilascio iniziale

@@ -88,7 +88,8 @@ Se o seu servidor usa Plesk, você **deve** desativar a configuração "Domínio
 
 Aponte seu domínio para o seu servidor configurando os seguintes registros DNS:
 
-- **Registro A** – Nome: `@` – Valor: o endereço IP do seu servidor
+- **Registro A** – Nome: `@` – Valor: o endereço IPv4 do seu servidor
+- **Registro AAAA** – Nome: `@` – Valor: o endereço IPv6 do seu servidor (opcional, se disponível)
 - **Registro CNAME** – Nome: `www` – Valor: seu domínio principal ou o CNAME do servidor
 
 Os valores necessários são exibidos em **Administração de Rede → Domain Mapping → Configurações**.
@@ -122,6 +123,14 @@ e possivelmente erros de "headers already sent" na página de login ou em outras
 3. Configurações do Domain Mapping – HTTPS, redirecionamentos e informações de DNS
 
 ## Changelog
+
+### 1.0.1
+- Correção: Corrigida a invalidação de cache após salvar um novo domínio nas configurações do site, para que os domínios recém-adicionados sejam resolvidos corretamente de imediato.
+- Correção: Resolvido um erro de análise (parse error) causado por métodos duplicados definidos fora da classe omdm_Login_Handler.
+- Correção: O mapeamento de domínios agora exclui corretamente as solicitações de login, AJAX e REST.
+- Correção: Corrigidos os valores padrão em set_default_options().
+- Novo: Adicionado suporte a IPv6 no campo de informações de DNS na página de configurações.
+- Novo: Introduzida uma validação de formato consistente para entradas IPv4, IPv6 e CNAME.
 
 ### 1.0.0
 - Lançamento inicial

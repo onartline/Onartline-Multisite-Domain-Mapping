@@ -6,11 +6,14 @@
  * @package Onartline_Multisite_Domain_Mapping
  */
 
+
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+
 class omdm_Loader {
+
 
     protected array $actions = [];
     protected array $filters = [];
@@ -18,22 +21,27 @@ class omdm_Loader {
     private string $plugin_name;
     private string $version;
 
+
     public function __construct( string $plugin_name, string $version ) {
         $this->plugin_name = $plugin_name;
         $this->version     = $version;
 
+
         $this->register_hooks();
     }
+
 
     /**
      * Alle Hooks des Plugins registrieren.
      */
     private function register_hooks(): void {
 
+
         // Domain Mapper
         $this->add_action( 'init', omdm_Domain_Mapper::class, 'map_domain' );
         $this->add_filter( 'site_url', omdm_Domain_Mapper::class, 'filter_site_url', 10, 4 );
         $this->add_filter( 'home_url', omdm_Domain_Mapper::class, 'filter_home_url', 10, 4 );
+
 
         // Login Handler
         $this->add_action( 'wp_login', omdm_Login_Handler::class, 'handle_login', 10, 2 );
@@ -42,8 +50,10 @@ class omdm_Loader {
         $this->add_filter( 'logout_url', omdm_Login_Handler::class, 'filter_logout_url', 10, 2 );
         $this->add_filter( 'admin_url', omdm_Login_Handler::class, 'filter_admin_url', 10, 3 );
 
+
         // Cron Handler
         $this->add_action( 'omdm_domain_check', omdm_Cron_Handler::class, 'run_domain_check' );
+
 
         // Network Admin – lazy, Hook-basiert
         $this->add_action( 'network_admin_menu',                    $this, 'load_network_admin' );
@@ -51,11 +61,13 @@ class omdm_Loader {
         $this->add_action( 'network_admin_edit_omdm_delete_domain', $this, 'load_network_admin' );
         $this->add_action( 'network_admin_edit_omdm_save_settings', $this, 'load_network_admin' );
 
+
         // Activator Notices
         if ( class_exists( 'omdm_Activator' ) ) {
             $this->add_action( 'network_admin_notices', 'omdm_Activator', 'activation_notices' );
         }
     }
+
 
     /**
      * Network Admin lazy laden.
@@ -63,9 +75,11 @@ class omdm_Loader {
     public function load_network_admin(): void {
         static $network_admin = null;
 
+
         if ( null === $network_admin ) {
             $network_admin = new omdm_Network_Admin( $this->plugin_name, $this->version );
         }
+
 
         match ( current_action() ) {
             'network_admin_menu'                    => $network_admin->add_network_menu(),
@@ -75,6 +89,7 @@ class omdm_Loader {
             default                                 => null,
         };
     }
+
 
     /**
      * Gibt eine bereits instanziierte Komponente zurück oder erzeugt sie bei Bedarf.
@@ -86,12 +101,29 @@ class omdm_Loader {
             return $component;
         }
 
+
         if ( ! isset( $this->instances[ $component ] ) ) {
-            $this->instances[ $component ] = new $component();
+            $this->instances[ $component ] = $this->instantiate_component( $component );
         }
+
 
         return $this->instances[ $component ];
     }
+	    /**
+     * Erzeugt eine Komponente inklusive ihrer benötigten Abhängigkeiten.
+     *
+     * @param string $component Vollqualifizierter Klassenname.
+     */
+    private function instantiate_component( string $component ): object {
+        if ( omdm_Login_Handler::class === $component ) {
+            $domain_mapper = $this->resolve_component( omdm_Domain_Mapper::class );
+            return new omdm_Login_Handler( $domain_mapper );
+        }
+
+
+        return new $component();
+    }
+
 
     private function add_action(
         string $hook,
@@ -103,6 +135,7 @@ class omdm_Loader {
         $this->actions[] = compact( 'hook', 'component', 'callback', 'priority', 'accepted_args' );
     }
 
+
     private function add_filter(
         string $hook,
         object|string $component,
@@ -112,6 +145,7 @@ class omdm_Loader {
     ): void {
         $this->filters[] = compact( 'hook', 'component', 'callback', 'priority', 'accepted_args' );
     }
+
 
     /**
      * Alle registrierten Hooks ausführen.
@@ -130,6 +164,7 @@ class omdm_Loader {
                 $action['accepted_args']
             );
         }
+
 
         foreach ( $this->filters as $filter ) {
             add_filter(

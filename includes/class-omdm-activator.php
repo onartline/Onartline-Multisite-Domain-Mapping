@@ -8,16 +8,20 @@
  * @package Onartline_Multisite_Domain_Mapping
  */
 
+
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+
 class omdm_Activator {
+
 
     /**
      * Marker, der die sunrise.php als vom Plugin verwaltet kennzeichnet.
      */
     const SUNRISE_MARKER = 'omdm_SUNRISE_MARKER';
+
 
     /**
      * Marker, den Nutzer in eine individuell angepasste sunrise.php eintragen
@@ -25,10 +29,12 @@ class omdm_Activator {
      */
     const CUSTOM_MARKER = 'omdm_CUSTOM_SUNRISE_MARKER';
 
+
     /**
      * Wird bei Plugin-Aktivierung aufgerufen.
      */
     public static function activate(): void {
+
 
         // ── Multisite-Voraussetzung prüfen ────────────────────────────────────
         if ( ! is_multisite() ) {
@@ -36,33 +42,43 @@ class omdm_Activator {
             return;
         }
 
+
         // ── Alte Transients bereinigen ────────────────────────────────────────
         self::clear_sunrise_transients();
+
 
         // ── Datenbank-Tabellen anlegen ────────────────────────────────────────
         self::create_tables();
 
+
         // ── Standard-Optionen setzen ──────────────────────────────────────────
         self::set_default_options();
 
+
         // ── WP_Filesystem initialisieren ──────────────────────────────────────
         require_once ABSPATH . 'wp-admin/includes/file.php';
+
 
         if ( ! WP_Filesystem() ) {
             set_transient( 'omdm_sunrise_not_writable', true, 300 );
             return;
         }
 
+
         global $wp_filesystem;
+
 
         $source      = plugin_dir_path( dirname( __FILE__ ) ) . 'sunrise.php';
         $destination = WP_CONTENT_DIR . '/sunrise.php';
+
 
         // sunrise.php bereits vorhanden → Herkunft und Version prüfen
         if ( $wp_filesystem->exists( $destination ) ) {
             $existing_content = $wp_filesystem->get_contents( $destination );
 
+
             if ( false !== $existing_content && false !== strpos( $existing_content, self::SUNRISE_MARKER ) ) {
+
 
                 // Individuell angepasste sunrise.php → nicht anfassen.
                 if ( false !== strpos( $existing_content, self::CUSTOM_MARKER ) ) {
@@ -70,13 +86,16 @@ class omdm_Activator {
                     return;
                 }
 
+
                 // Eigene, unveränderte sunrise.php – Version vergleichen.
                 $source_content = $wp_filesystem->exists( $source )
                     ? $wp_filesystem->get_contents( $source )
                     : false;
 
+
                 $existing_version = self::get_sunrise_marker_version( $existing_content );
                 $source_version   = $source_content ? self::get_sunrise_marker_version( $source_content ) : '0';
+
 
                 if ( false !== $source_content && version_compare( $source_version, $existing_version, '>' ) ) {
                     if ( $wp_filesystem->is_writable( WP_CONTENT_DIR ) && $wp_filesystem->copy( $source, $destination, true ) ) {
@@ -94,15 +113,18 @@ class omdm_Activator {
             return;
         }
 
+
         if ( ! $wp_filesystem->exists( $source ) ) {
             set_transient( 'omdm_sunrise_source_missing', true, 300 );
             return;
         }
 
+
         if ( ! $wp_filesystem->is_writable( WP_CONTENT_DIR ) ) {
             set_transient( 'omdm_sunrise_not_writable', true, 300 );
             return;
         }
+
 
         if ( $wp_filesystem->copy( $source, $destination, true ) ) {
             $wp_filesystem->delete( $source );
@@ -111,6 +133,7 @@ class omdm_Activator {
             set_transient( 'omdm_sunrise_copy_failed', true, 300 );
         }
     }
+
 
     /**
      * Deaktiviert das Plugin automatisch, falls es aufgrund des
@@ -125,14 +148,18 @@ class omdm_Activator {
             return;
         }
 
+
         require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
+
         $plugin_file = plugin_basename( plugin_dir_path( dirname( __FILE__ ) ) . 'onartline-multisite-domain-mapping.php' );
+
 
         if ( is_plugin_active( $plugin_file ) ) {
             deactivate_plugins( $plugin_file );
         }
     }
+
 
     /**
      * Löscht alle sunrise-bezogenen Transients, damit bei einer erneuten
@@ -151,10 +178,12 @@ class omdm_Activator {
             'omdm_sunrise_custom_detected',
         );
 
+
         foreach ( $transients as $transient ) {
             delete_transient( $transient );
         }
     }
+
 
     /**
      * Liest die Versionsnummer aus dem omdm_SUNRISE_MARKER-Kommentarblock aus.
@@ -164,15 +193,20 @@ class omdm_Activator {
             return $matches[1];
         }
         return '0';
-    }    /**
+    }
+
+
+    /**
      * Datenbank-Tabellen erstellen.
      */
     private static function create_tables(): void {
         global $wpdb;
         require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
+
         $charset = $wpdb->get_charset_collate();
         $prefix  = $wpdb->base_prefix;
+
 
         $sql1 = "CREATE TABLE {$prefix}omdm_domain_mapping (
             id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -186,6 +220,7 @@ class omdm_Activator {
             KEY blog_id (blog_id),
             KEY domain (domain)
         ) $charset;";
+
 
         $sql2 = "CREATE TABLE {$prefix}omdm_login_tokens (
             id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -201,9 +236,11 @@ class omdm_Activator {
     KEY expires_at (expires_at)
         ) $charset;";
 
+
         dbDelta( $sql1 );
         dbDelta( $sql2 );
     }
+
 
     /**
      * Standard-Optionen setzen.
@@ -212,17 +249,28 @@ class omdm_Activator {
         if ( ! get_site_option( 'omdm_version' ) ) {
             add_site_option( 'omdm_version', omdm_VERSION );
         }
-        if ( false === get_site_option( 'omdm_https_redirect' ) ) {
-            add_site_option( 'omdm_https_redirect', 0 );
+        if ( false === get_site_option( 'omdm_force_https' ) ) {
+            add_site_option( 'omdm_force_https', 0 );
         }
         if ( false === get_site_option( 'omdm_301_redirect' ) ) {
             add_site_option( 'omdm_301_redirect', 0 );
         }
+        if ( false === get_site_option( 'omdm_allow_site_mapping' ) ) {
+            add_site_option( 'omdm_allow_site_mapping', 0 );
+        }
         if ( false === get_site_option( 'omdm_delete_data_on_uninstall' ) ) {
             add_site_option( 'omdm_delete_data_on_uninstall', 0 );
         }
+        if ( false === get_site_option( 'omdm_server_ip' ) ) {
+            add_site_option( 'omdm_server_ip', '' );
+        }
+        if ( false === get_site_option( 'omdm_server_ipv6' ) ) {
+            add_site_option( 'omdm_server_ipv6', '' );
+        }
+        if ( false === get_site_option( 'omdm_server_cname' ) ) {
+            add_site_option( 'omdm_server_cname', '' );
+        }
     }
-
     /**
      * Prüft dynamisch, ob SUNRISE bereits korrekt in der wp-config.php
      * gesetzt ist, und liefert passenden HTML-Hinweis zurück.
@@ -236,6 +284,7 @@ class omdm_Activator {
                 )
                 . '</p>';
         }
+
 
         return '<p><strong>' . esc_html__( 'Note:', 'onartline-multisite-domain-mapping' ) . '</strong> '
             . esc_html__(
@@ -252,9 +301,11 @@ class omdm_Activator {
     private static function get_source_cleanup_notice_html(): string {
         $source = plugin_dir_path( dirname( __FILE__ ) ) . 'sunrise.php';
 
+
         if ( ! file_exists( $source ) ) {
             return '';
         }
+
 
         return '<p>' . sprintf(
         /* translators: %s: Dateipfad zur unbenutzten sunrise.php im Plugin-Ordner. */
@@ -266,6 +317,7 @@ class omdm_Activator {
         ) . '</p>';
     }
 
+
     /**
      * Erstellt die abgesicherte URL für den "Installation fortsetzen"-Button.
      */
@@ -276,6 +328,7 @@ class omdm_Activator {
         );
     }
 
+
     /**
      * Wird aufgerufen, wenn der Nutzer im Admin-Notice auf
      * "Installation jetzt fortsetzen" klickt.
@@ -283,19 +336,26 @@ class omdm_Activator {
     public static function retry_sunrise_install(): void {
         check_admin_referer( 'omdm_retry_sunrise_install' );
 
+
         if ( ! current_user_can( 'manage_network_options' ) ) {
             wp_die( esc_html__( 'No permission.', 'onartline-multisite-domain-mapping' ) );
         }
 
+
         self::activate();
+
 
         $redirect = wp_get_referer() ? wp_get_referer() : network_admin_url( 'plugins.php' );
         wp_safe_redirect( $redirect );
         exit;
-    }    /**
+    }
+
+
+    /**
      * Admin-Notices nach Aktivierung anzeigen.
      */
     public static function activation_notices(): void {
+
 
         if ( get_transient( 'omdm_requires_multisite' ) ) {
             delete_transient( 'omdm_requires_multisite' );
@@ -308,6 +368,7 @@ class omdm_Activator {
                 . '</p></div>';
             return;
         }
+
 
         if ( get_transient( 'omdm_sunrise_copied' ) ) {
             delete_transient( 'omdm_sunrise_copied' );
@@ -323,6 +384,7 @@ class omdm_Activator {
             return;
         }
 
+
         if ( get_transient( 'omdm_sunrise_updated' ) ) {
             delete_transient( 'omdm_sunrise_updated' );
             echo '<div class="notice notice-success is-dismissible"><p>'
@@ -336,6 +398,7 @@ class omdm_Activator {
                 . '</div>';
             return;
         }
+
 
         if ( get_transient( 'omdm_sunrise_update_failed' ) ) {
             delete_transient( 'omdm_sunrise_update_failed' );
@@ -357,6 +420,7 @@ class omdm_Activator {
             return;
         }
 
+
         // ── Individuell angepasste sunrise.php erkannt ────────────────────────
         if ( get_transient( 'omdm_sunrise_custom_detected' ) ) {
             delete_transient( 'omdm_sunrise_custom_detected' );
@@ -371,6 +435,7 @@ class omdm_Activator {
                 . '</div>';
             return;
         }
+
 
         if ( get_transient( 'omdm_sunrise_foreign_exists' ) ) {
             delete_transient( 'omdm_sunrise_foreign_exists' );
@@ -391,6 +456,7 @@ class omdm_Activator {
                 . '</div>';
             return;
         }
+
 
         if ( get_transient( 'omdm_sunrise_not_writable' ) ) {
             delete_transient( 'omdm_sunrise_not_writable' );
@@ -422,6 +488,7 @@ class omdm_Activator {
             return;
         }
 
+
         if ( get_transient( 'omdm_sunrise_source_missing' ) ) {
             delete_transient( 'omdm_sunrise_source_missing' );
             echo '<div class="notice notice-error is-dismissible"><p>'
@@ -433,6 +500,7 @@ class omdm_Activator {
                 . '</p></div>';
             return;
         }
+
 
         if ( get_transient( 'omdm_sunrise_copy_failed' ) ) {
             delete_transient( 'omdm_sunrise_copy_failed' );
@@ -457,6 +525,7 @@ class omdm_Activator {
                 . '</ol></div>';
             return;
         }
+
 
         if ( get_transient( 'omdm_sunrise_already_exists' ) ) {
             delete_transient( 'omdm_sunrise_already_exists' );

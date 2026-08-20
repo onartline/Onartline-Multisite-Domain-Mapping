@@ -3,7 +3,7 @@
  * Plugin Name:       Onartline Multisite Domain Mapping
  * Plugin URI:        https://wordpress.org/plugins/onartline-multisite-domain-mapping
  * Description:       Map domains to sites in a WordPress Multisite network. Requires PHP 8.3+ and WordPress 7.0+.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 7.0
  * Requires PHP:      8.3
  * Author:            onartline
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // ── Plugin-Konstanten ─────────────────────────────────────────────────────────
 
-define( 'omdm_VERSION',     '1.0.0' );
+define( 'omdm_VERSION',     '1.0.1' );
 define( 'omdm_DB_VERSION',  '1.0.0' );
 define( 'omdm_PLUGIN_DIR',  plugin_dir_path( __FILE__ ) );
 define( 'omdm_PLUGIN_URL',  plugin_dir_url( __FILE__ ) );

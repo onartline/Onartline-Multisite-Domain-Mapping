@@ -88,7 +88,8 @@ Als uw server Plesk gebruikt, **moet** u de instelling "Voorkeursdomein" uitscha
 
 Wijs uw domein naar uw server door de volgende DNS-records in te stellen:
 
-- **A-record** – Naam: `@` – Waarde: het IP-adres van uw server
+- **A-record** – Naam: `@` – Waarde: het IPv4-adres van uw server
+- **AAAA-record** – Naam: `@` – Waarde: het IPv6-adres van uw server (optioneel, indien beschikbaar)
 - **CNAME-record** – Naam: `www` – Waarde: uw primaire domein of server-CNAME
 
 De benodigde waarden worden weergegeven in **Netwerkbeheer → Domain Mapping → Instellingen**.
@@ -122,6 +123,14 @@ en mogelijk "headers already sent"-fouten op de inlogpagina of elders.
 3. Domain Mapping-instellingen – HTTPS, omleidingen en DNS-informatie
 
 ## Changelog
+
+### 1.0.1
+- Fix: Cache-invalidatie na het opslaan van een nieuw domein in de site-instellingen gecorrigeerd, zodat nieuw toegevoegde domeinen direct correct worden opgelost.
+- Fix: Parse error opgelost die werd veroorzaakt door dubbele methoden gedefinieerd buiten de klasse omdm_Login_Handler.
+- Fix: Domeintoewijzing sluit nu correct login-, AJAX- en REST-verzoeken uit.
+- Fix: Standaardwaarden in set_default_options() gecorrigeerd.
+- Nieuw: IPv6-ondersteuning toegevoegd aan het DNS-informatieveld op de instellingenpagina.
+- Nieuw: Consistente formaatvalidatie geïntroduceerd voor IPv4-, IPv6- en CNAME-invoer.
 
 ### 1.0.0
 - Eerste release

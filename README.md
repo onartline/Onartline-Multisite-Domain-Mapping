@@ -88,7 +88,8 @@ If your server runs Plesk, you **must** disable the "Preferred Domain" setting f
 
 Point your domain to your server by setting the following DNS records:
 
-- **A Record** – Name: `@` – Value: Your server IP address
+- **A Record** – Name: `@` – Value: Your server's IPv4 address
+- **AAAA Record** – Name: `@` – Value: Your server's IPv6 address (optional, if available)
 - **CNAME Record** – Name: `www` – Value: Your primary domain or server CNAME
 
 The required values are displayed in **Network Admin → Domain Mapping → Settings**.
@@ -122,6 +123,14 @@ and potentially `headers already sent` errors on the login page or elsewhere.
 3. Domain Mapping Settings – HTTPS, redirects and DNS information
 
 ## Changelog
+
+### 1.0.1
+- Fix: Corrected cache invalidation after saving a new domain in the site settings, so newly added domains resolve correctly right away.
+- Fix: Resolved a parse error caused by duplicate methods defined outside the omdm_Login_Handler class.
+- Fix: Domain mapping now correctly excludes login, AJAX, and REST requests.
+- Fix: Corrected default values in set_default_options().
+- New: Added IPv6 support to the DNS information field on the settings page.
+- New: Introduced consistent format validation for IPv4, IPv6, and CNAME entries.
 
 ### 1.0.0
 - Initial release

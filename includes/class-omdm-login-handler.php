@@ -136,7 +136,7 @@ class omdm_Login_Handler {
             $host     = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';
             $uri      = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
             $uri      = remove_query_arg( 'omdm_token', $uri );
-            $redirect = $scheme . '://' . $host . $uri;
+            $redirect = esc_url_raw( $scheme . '://' . $host . $uri );
         }
 
         wp_safe_redirect( $redirect );
